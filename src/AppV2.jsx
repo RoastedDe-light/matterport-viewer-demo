@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Link, useParams } from "react-router-dom";
 
 // ⚠️ Replace these with your actual Matterport credentials
-const TOKEN = process.env.MATTERPORT_API_TOKEN;
-const SECRET = process.env.MATTERPORT_API_SECRET;
-const SDK_KEY = process.env.MATTERPORT_SDK_KEY; // For SDK connection (optional)
+const TOKEN = import.meta.env.VITE_MATTERPORT_API_TOKEN;
+const SECRET = import.meta.env.VITE_MATTERPORT_API_SECRET;
+const SDK_KEY = import.meta.env.VITE_MATTERPORT_SDK_KEY; // For SDK connection (optional)
 
 const AUTH_HEADER = "Basic " + btoa(`${TOKEN}:${SECRET}`);
 const GRAPHQL_URL = "https://api.matterport.com/api/models/graph";
@@ -115,18 +115,17 @@ function ModelViewerPage() {
   }, [sid]);
 
   return (
-    <div style={{ padding: "2rem", fontFamily: "sans-serif"}}>
+    <div style={{ padding: "2rem", fontFamily: "sans-serif" }}>
       <h1>Model Viewer</h1>
       {sid && (
         <iframe
           ref={iframeRef}
           title="Matterport Viewer"
           src={`https://my.matterport.com/show/?m=${sid}&play=1`}
-          width="100%"
-          height="600"
+          width="1200"
+          height="700"
           allow="xr-spatial-tracking"
           allowFullScreen
-          frameBorder="0"
         ></iframe>
       )}
     </div>
